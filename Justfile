@@ -1,3 +1,4 @@
+mod finalysis
 
 VENV := ".venv"
 BIN := ".venv/bin"

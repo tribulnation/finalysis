@@ -5,3 +5,4 @@ __pycache__
 *.egg-info/
 *.py[cod]
 dev.ipynb
+examples.ipynb

@@ -26,7 +26,7 @@ def payoff(
   Returns:
   - plotly.graph_objects.Figure
   """
-  X = np.linspace(min_price or 0.75 * price, max_price or 1.5 * price, steps)
+  X = np.linspace(min_price or 0.9 * price, max_price or 1.1 * price, steps)
   Y = strategy.payoff({'final_price': X})
 
   if relative:

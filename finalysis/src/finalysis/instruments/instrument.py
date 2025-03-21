@@ -20,7 +20,7 @@ class Instrument(ABC, Generic[D]):
     return Sum([self, other])
   
   def __mul__(self, quantity: float) -> 'Instrument[D]':
-    return replace(self, quantity=quantity)
+    return replace(self, quantity=quantity*self.quantity)
   
   __rmul__ = __mul__
 
@@ -29,6 +29,9 @@ class Instrument(ABC, Generic[D]):
   
   def __sub__(self, other: 'Instrument[D2]') -> 'Sum[D2]':
     return self + -other
+  
+  def __rsub__(self, other: 'Instrument[D2]') -> 'Sum[D2]':
+    return -self + other
   
 @dataclass
 class Sum(Instrument[D]):
