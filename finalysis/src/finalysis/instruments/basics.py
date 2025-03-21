@@ -6,6 +6,7 @@ from .instrument import Instrument
 @dataclass
 class Spot(Instrument):
   price: float
+  fee: float = 0
   def payoff(self, data):
     return (data['final_price'] - self.price) * self.quantity
 

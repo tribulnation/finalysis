@@ -44,3 +44,4 @@ class Sum(Instrument[D]):
   
   def __mul__(self, quantity: float) -> 'Sum[D]':
     return replace(self, instruments=[instrument * quantity for instrument in self.instruments])
+  
