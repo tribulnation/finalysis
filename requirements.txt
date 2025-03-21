@@ -2,4 +2,4 @@ build
 twine
 ipykernel
 pyright
--e finalysis
+-e finalysis[plot]
