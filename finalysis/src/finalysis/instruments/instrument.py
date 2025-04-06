@@ -1,4 +1,4 @@
-from typing_extensions import TypeVar, Generic, TypedDict
+from typing_extensions import TypeVar, Generic, TypedDict, Sequence
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field, replace
 import numpy as np
@@ -35,12 +35,12 @@ class Instrument(ABC, Generic[D]):
   
 @dataclass
 class Sum(Instrument[D]):
-  instruments: list[Instrument[D]]
+  instruments: Sequence[Instrument[D]]
   def payoff(self, data: D) -> np.ndarray:
     return np.sum([instrument.payoff(data) for instrument in self.instruments], axis=0)
   
   def __add__(self, other: 'Instrument[D2]') -> 'Sum[D2]':
-    return replace(self, instruments=self.instruments + [other])
+    return replace(self, instruments=list(self.instruments) + [other])
   
   def __mul__(self, quantity: float) -> 'Sum[D]':
     return replace(self, instruments=[instrument * quantity for instrument in self.instruments])
