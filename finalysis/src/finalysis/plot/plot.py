@@ -1,9 +1,9 @@
 import numpy as np
 import plotly.graph_objects as go
-from finalysis.instruments import Instrument
+from finalysis.instruments import Instrument, Data
 
 def payoff(
-  strategy: Instrument,
+  strategy: Instrument[Data],
   price: float,
   *,
   min_price: float | None = None,
