@@ -31,6 +31,7 @@ class SpotGrid(Instrument[GridData]):
   sell_price: float
   fee: float = 0
   debug: bool = False
+  unrealized_pnl: bool = True
 
   def payoff(self, data: GridData):
     import numpy as np
@@ -65,8 +66,13 @@ class SpotGrid(Instrument[GridData]):
       step(c['close'])
       
     if bought:
-      payoff += data['final_price']
-      if self.debug:
-        print(f"Final value: {data['final_price']}, payoff:", payoff)
+      if self.unrealized_pnl is False:
+        payoff += self.buy_price
+        if self.debug:
+          print(f"Assuming buy value as final: {self.buy_price}, payoff:", payoff)
+      else:
+        if self.debug:
+          print(f"Final value: {data['final_price']}, payoff:", payoff)
+        payoff += data['final_price']
 
     return payoff * self.quantity
