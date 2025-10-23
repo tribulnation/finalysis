@@ -39,7 +39,7 @@ class Sum(Instrument):
   instruments: list[Instrument]
 
   def payoff(self, underlying: N, /):
-    return np.sum([instrument.payoff(underlying) for instrument in self.instruments], axis=0)
+    return np.sum([instrument.payoff(underlying) for instrument in self.instruments], axis=0)*self.quantity
   
   def __add__(self, other: 'Instrument') -> 'Sum':
     return replace(self, instruments=self.instruments + [other])
