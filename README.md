@@ -5,6 +5,10 @@ A python library for financial instrument payoff analysis.
 
 ## 🚀 Quickstart
 
+```bash
+pip install finalysis
+```
+
 ```python
 from finalysis import Spot, Option, plot
 
