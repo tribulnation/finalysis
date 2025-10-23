@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import json
 from dataclasses import asdict
-from finalysis.instruments import Option, Spot, Future, SellHighDI, BuyLowDI, SmartLeverage, Sum, Instrument
+from finalysis.instruments import Option, Spot, Future, Sum, Instrument
 from finalysis import plot
 
 st.set_page_config(page_title="Finalysis", layout="wide")
@@ -38,23 +38,6 @@ with left:
             entry = st.number_input("Entry Price", value=635.0, key=key + "_entry")
             ftype = st.selectbox("Kind", ["long", "short"], key=key + "_ftype")
             return Future(price=entry, kind=ftype, quantity=quantity)
-
-        if kind == "SellHighDI":
-            strike = st.number_input("Strike", value=640.0, key=key + "_strike")
-            price = st.number_input("Initial Price", value=630.0, key=key + "_price")
-            rate = st.number_input("Rate", value=0.05, step=0.01, key=key + "_rate")
-            return SellHighDI(strike=strike, price=price, rate=rate, quantity=quantity)
-
-        if kind == "BuyLowDI":
-            strike = st.number_input("Strike", value=620.0, key=key + "_strike")
-            price = st.number_input("Initial Price", value=630.0, key=key + "_price")
-            rate = st.number_input("Rate", value=0.05, step=0.01, key=key + "_rate")
-            return BuyLowDI(strike=strike, price=price, rate=rate, quantity=quantity)
-
-        if kind == "SmartLeverage":
-            breakeven = st.number_input("Breakeven", value=630.0, key=key + "_be")
-            leverage = st.number_input("Leverage", value=3.0, step=0.5, key=key + "_lev")
-            return SmartLeverage(breakeven=breakeven, leverage=leverage, quantity=quantity)
 
         return None
 
@@ -94,9 +77,6 @@ with left:
             "Option": Option,
             "Spot": Spot,
             "Future": Future,
-            "SellHighDI": SellHighDI,
-            "BuyLowDI": BuyLowDI,
-            "SmartLeverage": SmartLeverage
         }
         st.session_state.strategy = [type_map[item.pop("type")](**item) for item in parsed]
     except Exception:

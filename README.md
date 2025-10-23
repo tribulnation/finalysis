@@ -17,7 +17,7 @@ plot.payoff(strategy, current_price)
 
 ## 📦 Features
 
-- Core primitives: Spot, Option, Future, and structured products like DualInvestment, SmartLeverage
+- Core primitives: Spot, Option, Future
 - Strategy composition using +, -, * operators
 - Streamlit UI to build strategies interactively (https://finalysis-python.streamlit.app/)
 - Plotting payoff diagrams
@@ -30,15 +30,3 @@ plot.payoff(strategy, current_price)
 | Bull Call | `Option(strike=95, premium=6, kind='call') - Option(strike=105, premium=2, kind='call')` | ![Bull Call](media/bull_call.png) |
 | Protective Put | `Spot(price=100) + Option(strike=95, premium=3, kind='put')` | ![Protective Put](media/protective_put.png) |
 | Iron Condor | `Option(strike=96, premium=1.5, kind='put') -Option(strike=98, premium=2, kind='put') -Option(strike=102, premium=2, kind='call') + Option(strike=104, premium=1.5, kind='call')` | ![Iron Condor](media/iron_condor.png) |
-
-## 🔧 Other Instruments
-
-```python
-from finalysis.instruments import (
-  SellHighDI,
-  BuyLowDI,
-  SmartLeverage,
-  SpotGrid,
-  SpotLimit
-)
-```
